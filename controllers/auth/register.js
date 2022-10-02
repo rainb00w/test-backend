@@ -5,7 +5,8 @@ const gravatar = require("gravatar");
 const {nanoid} = require("nanoid");
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
+  
   const user = await User.findOne({ email });
   if (user) {
     throw RequestError(409, "Email already exist");
@@ -16,16 +17,15 @@ const register = async (req, res) => {
   const verificationToken = nanoid();
 
   
-  const result = await User.create({ email, password: hashPassword, avatarURL, verificationToken });
+  const result = await User.create({name, email, password: hashPassword, avatarURL, verificationToken });
   const mail = {
     to: email,
     subject: "Подтверждение регистрации на сайте",
-    html: `<a href="http://localhost:3000/api/auth/verify/${verificationToken}" target="_blank">Нажмите для подтверждения email</a>`
+    html: `Вы зарегистировались на сайте FindYourDragon. Пожалуйста нажмите на ссылку для подтверждения вашего Email. После подтверждения вернитесь на страницу Логина. <a href="http://localhost:3006/api/auth/verify/${verificationToken}" target="_blank">Нажмите для подтверждения email</a>`
 };
 await sendEmail(mail);
   res.status(201).json({
     email: result.email,
-    subscription: result.subscription,
   });
 };
 

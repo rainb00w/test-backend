@@ -1,31 +1,31 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const ctrl = require("../../controllers/contacts");
+const ctrl = require('../../controllers/contacts');
 
 const {
   authenticate,
   vallidationBody,
   isValidId,
-} = require("../../middlewares");
-const { ctrlWrapper } = require("../../helpers/");
+} = require('../../middlewares');
+const { ctrlWrapper } = require('../../helpers/');
 
-const { schemas } = require("../../models/contact");
+const { schemas } = require('../../models/contact');
 
-router.get("/", authenticate, ctrlWrapper(ctrl.getAll));
+router.get('/', authenticate, ctrlWrapper(ctrl.getAll));
 
-router.get("/:contactId", authenticate, isValidId, ctrlWrapper(ctrl.getById));
+router.get('/:contactId', authenticate, isValidId, ctrlWrapper(ctrl.getById));
 
-router.post("/", authenticate, vallidationBody(schemas.addScheme), ctrl.add);
+router.post('/', authenticate, vallidationBody(schemas.addScheme), ctrl.add);
 
 router.delete(
-  "/:contactId",
+  '/:contactId',
   authenticate,
   isValidId,
   ctrlWrapper(ctrl.removeById)
 );
 
 router.put(
-  "/:contactId",
+  '/:contactId',
   authenticate,
   isValidId,
   vallidationBody(schemas.addScheme),
@@ -33,7 +33,7 @@ router.put(
 );
 
 router.patch(
-  "/:contactId/favorite",
+  '/:contactId/favorite',
   authenticate,
   isValidId,
   vallidationBody(schemas.updateFavorite),

@@ -7,11 +7,9 @@ const contactSchema = new Schema({
         type: String,
         required: [true, 'Set name for contact'],
       },
-      email: {
+      dragon_id: {
         type: String,
-      },
-      phone: {
-        type: String,
+        required: [true, 'Set name for contact'],
       },
       favorite: {
         type: Boolean,
@@ -30,9 +28,7 @@ contactSchema.post("save", handleSchemaValidationError)
 
 const addScheme = Joi.object({
     name: Joi.string().required(),
-    email: Joi.string().required(),
-    phone: Joi.string().required(),
-    favorite: Joi.boolean(),
+    dragon_id: Joi.string().required(),
   });
 
   const updateFavorite = Joi.object({
