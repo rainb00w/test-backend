@@ -9,9 +9,7 @@ const verifyEmail = async(req, res) => {
         throw RequestError(404, "Not found verification token")
     }
     await User.findByIdAndUpdate(user._id, {verify: true, verificationToken: ""});
-    res.json({
-        message: "Verification successful"
-    })
+    res.redirect('https://incredible-cucurucho-a8f32b.netlify.app/');
 };
 
 module.exports = verifyEmail;
