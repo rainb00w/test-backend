@@ -21,7 +21,8 @@ const register = async (req, res) => {
   const mail = {
     to: email,
     subject: "Подтверждение регистрации на сайте",
-    html: `Вы зарегистировались на сайте FindYourDragon. Пожалуйста нажмите на ссылку для подтверждения вашего Email. После подтверждения вернитесь на страницу Логина. <a href="http://localhost:3006/api/auth/verify/${verificationToken}" target="_blank">Нажмите для подтверждения email</a>`
+    html: `Нou have registered on the Find Your Dragon. Please click on the link to confirm your email. 
+    After confirmation, return to the login page. <a href="https://test-back-end-raduka.herokuapp.com/api/auth/verify/${verificationToken}" target="_blank">Click to confirm.</a>`
 };
 await sendEmail(mail);
   res.status(201).json({
